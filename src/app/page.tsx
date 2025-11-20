@@ -354,13 +354,13 @@ export default function InvoiceGenerator() {
                     <td className="py-4 pr-2 text-right align-top text-sm font-medium text-foreground">
                       {formatCurrency((item.quantity * item.price), data.details.currency)}
                     </td>
-                    <td className="py-4 text-center align-top no-print">
+                    <td className="text-center no-print">
                       <Button
                         onClick={() => removeItem(item.id)}
                         variant="ghost"
                         size="icon-sm"
                         disabled={data.items.length === 1}
-                        className="text-muted-foreground hover:text-destructive"
+                        className="text-muted-foreground hover:text-destructive -mt-1"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
