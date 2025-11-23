@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   description: appConfig.description,
 }
 
+export const viewport: Metadata['viewport'] = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{

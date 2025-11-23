@@ -164,10 +164,9 @@
 /* Add print styles for invoice generation */
 @media print {
   @page {
-    /* Updated page margins for better print layout */
-    margin: 0 !important;
-    padding: 0;
-    size: A4 portrait !important;
+    /* Safari ignora !important aquí, mejor sin eso */
+    size: A4 portrait;
+    margin: 0;
   }
 
   html, body {
@@ -178,16 +177,29 @@
   body {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    /* 'color-adjust' está deprecado en algunos browsers, pero no estorba */
+    color-adjust: exact;
   }
-  
+
   html {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    color-adjust: exact;
   }
 
   /* Hide non-printable elements */
   .no-print {
     display: none !important;
+  }
+
+  /* Define tu "hoja A4" explícita para mejor control del área imprimible */
+  .invoice-page {
+    width: 210mm;        /* A4 width */
+    min-height: 297mm;   /* A4 height */
+    margin: 0 auto;
+    box-sizing: border-box;
+    /* Deja un padding interno si quieres "margen" visual */
+    padding: 10mm;
   }
 
   /* Clean up inputs and textareas for print */
@@ -196,15 +208,27 @@
     background: transparent !important;
     padding: 0 !important;
     margin: 0 !important;
-    appearance: none !important;
     -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
     font-size: inherit !important;
     font-family: inherit !important;
     overflow: visible !important;
     display: inline !important;
   }
-  
-  /* Force textareas to display properly without scroll */
+
+  /* Ocultar los controles de número (spinners) en Safari y otros navegadores */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+    display: none !important;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield !important;
+  }
+
   textarea {
     border: none !important;
     background: transparent !important;
@@ -219,5 +243,6 @@
     line-height: 1.3 !important;
     white-space: pre-wrap !important;
     word-wrap: break-word !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 }
