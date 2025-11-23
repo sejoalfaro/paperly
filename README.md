@@ -1,4 +1,4 @@
-# Paper-kit
+# Paperly
 Create stunning invoices with a design system inspired by Vercel.
 
 This tool focuses purely on aesthetics and simplicity. It is not an accounting system; it takes your data and renders a crisp, minimalist PDF ready to send.
