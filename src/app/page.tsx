@@ -3,6 +3,7 @@ import { Navbar } from '@/src/components/navbar'
 import { Footer } from '@/src/components/footer'
 import { FAQ } from '@/src/components/common/faq'
 import { ComparisonTable } from '@/src/components/common/comparison-table'
+import { InvoiceShowcase } from '@/src/components/common/invoice-showcase'
 import { Button } from '@/src/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/src/components/ui/card'
 import { ArrowRight, FileText, Download, Edit3, Star, Users, Clock, Shield, Check, TrendingUp, Sparkles, Lock, Globe } from 'lucide-react'
@@ -75,6 +76,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Invoice Showcase Section */}
+      <InvoiceShowcase />
 
       {/* Features Section */}
       <section className="py-24 sm:py-32 lg:py-40">
