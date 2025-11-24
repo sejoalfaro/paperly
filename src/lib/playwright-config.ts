@@ -21,6 +21,8 @@ export const BROWSER_LAUNCH_OPTIONS: LaunchOptions = {
     '--no-first-run',
     '--no-zygote',
     '--disable-web-security', // Solo si necesitas cargar recursos externos
+    '--ignore-certificate-errors', // Ignorar errores de certificados SSL
+    '--ignore-certificate-errors-spki-list',
   ],
 }
 

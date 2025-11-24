@@ -6,6 +6,7 @@ import {
   STYLE_LOAD_DELAY,
   PDF_OPTIONS,
 } from '@/src/lib/playwright-config'
+import { env } from '@/src/env'
 
 export const runtime = 'nodejs' // Importante: NO edge
 export const dynamic = 'force-dynamic' // No cachear
@@ -25,9 +26,10 @@ export async function GET(req: NextRequest) {
     )
   }
 
-  // Usamos el mismo origin desde donde se llamó la API
-  const { origin } = new URL(req.url)
-  const invoiceUrl = `${origin}/invoice?data=${encodeURIComponent(encodedData)}&print=true&theme=${theme}`
+  // Determinar la URL base para Playwright desde variable de entorno
+  const baseUrl = env.NEXT_PUBLIC_APP_URL
+  
+  const invoiceUrl = `${baseUrl}/invoice?data=${encodeURIComponent(encodedData)}&print=true&theme=${theme}`
 
   let browser = null
 
@@ -35,7 +37,9 @@ export async function GET(req: NextRequest) {
     // Iniciar Chromium headless con configuración optimizada
     browser = await chromium.launch(BROWSER_LAUNCH_OPTIONS)
 
-    const page = await browser.newPage()
+    const page = await browser.newPage({
+      ignoreHTTPSErrors: true, // Ignorar errores HTTPS adicionales
+    })
 
     // Cargar la página de factura con datos en URL
     await page.goto(invoiceUrl, PAGE_GOTO_OPTIONS)
