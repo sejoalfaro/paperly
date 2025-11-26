@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/src/components/theme-provider'
 import { appConfig } from '@/src/lib/config'
 import './globals.css'
@@ -39,7 +38,6 @@ export default function RootLayout({
             {children}
             <Toaster />
           </ThemeProvider>
-          <Analytics />
         </body>
       </html>
     </>
