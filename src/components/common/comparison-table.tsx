@@ -76,7 +76,7 @@ export function ComparisonTable() {
               <div className="grid grid-cols-3 gap-3 p-4">
                 {/* App */}
                 <div className="flex flex-col items-center justify-center text-center gap-2">
-                  <div className="flex items-center gap-1 text-xs font-medium text-muted-foreground mb-1">
+                  <div className="flex flex-row items-center justify-center gap-1 text-xs font-medium text-muted-foreground mb-1">
                     <FileText className="w-3 h-3 text-primary" />
                     <span>{appConfig.name}</span>
                   </div>
@@ -127,7 +127,7 @@ export function ComparisonTable() {
                   Característica
                 </TableHead>
                 <TableHead className="text-center font-semibold text-foreground">
-                  <div className="flex flex-col items-center gap-1">
+                  <div className="flex flex-row items-center justify-center gap-1">
                     <FileText className="w-5 h-5 text-primary" />
                     <span>{appConfig.name}</span>
                   </div>

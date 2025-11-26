@@ -49,15 +49,15 @@ export function InvoiceShowcase() {
                     </TabsList>
 
                     <TabsContent value="light" className="mt-0">
-                        <div className="max-w-4xl mx-auto">
-                            <Card className="overflow-hidden border-2 shadow-2xl hover:shadow-3xl transition-shadow duration-300 py-0">
+                        <div className="max-w-4xl w-fit mx-auto">
+                            <Card className="overflow-hidden w-fit border-2 shadow-2xl hover:shadow-3xl transition-shadow duration-300 py-0">
                                 <div className="relative group">
                                     <Image
                                         src="/images/examples/invoice-light.jpg"
                                         alt="Ejemplo de factura con tema claro - Paper Kit"
-                                        width={1240}
-                                        height={1754}
-                                        className="w-full h-auto"
+                                        height={1200}
+                                        width={800}
+                                        className="h-[900px] w-fit"
                                         preload
                                     />
                                     <Dialog>
@@ -74,8 +74,8 @@ export function InvoiceShowcase() {
                                             <Image
                                                 src="/images/examples/invoice-light.jpg"
                                                 alt="Ejemplo de factura con tema claro - Paper Kit"
-                                                width={1240}
-                                                height={1754}
+                                                height={1200}
+                                                width={800}
                                                 className="w-full h-auto rounded-lg"
                                                 preload
                                             />
@@ -87,15 +87,15 @@ export function InvoiceShowcase() {
                     </TabsContent>
 
                     <TabsContent value="dark" className="mt-0">
-                        <div className="max-w-4xl mx-auto">
+                        <div className="max-w-4xl w-fit mx-auto">
                             <Card className="overflow-hidden border-2 shadow-2xl hover:shadow-3xl transition-shadow duration-300 py-0">
                                 <div className="relative group">
                                     <Image
                                         src="/images/examples/invoice-dark.jpg"
                                         alt="Ejemplo de factura con tema oscuro - Paper Kit"
-                                        width={1200}
-                                        height={1600}
-                                        className="w-full h-auto"
+                                        height={1200}
+                                        width={800}
+                                        className="h-[900px] w-fit"
                                         preload
                                     />
                                     <Dialog>
@@ -112,8 +112,8 @@ export function InvoiceShowcase() {
                                             <Image
                                                 src="/images/examples/invoice-dark.jpg"
                                                 alt="Ejemplo de factura con tema oscuro - Paper Kit"
-                                                width={1200}
-                                                height={1600}
+                                                height={1200}
+                                                width={800}
                                                 className="w-full h-auto rounded-lg"
                                                 preload
                                             />
