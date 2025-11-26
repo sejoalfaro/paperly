@@ -57,7 +57,7 @@ export function InvoiceShowcase() {
                                         alt="Ejemplo de factura con tema claro - Paper Kit"
                                         height={1200}
                                         width={800}
-                                        className="h-[900px] w-fit"
+                                        className="h-fit w-fit"
                                         preload
                                     />
                                     <Dialog>
@@ -95,7 +95,7 @@ export function InvoiceShowcase() {
                                         alt="Ejemplo de factura con tema oscuro - Paper Kit"
                                         height={1200}
                                         width={800}
-                                        className="h-[900px] w-fit"
+                                        className="h-fit w-fit"
                                         preload
                                     />
                                     <Dialog>
