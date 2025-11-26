@@ -64,7 +64,7 @@ export default function LandingPage() {
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link href={appConfig.routes.invoice}>
-                <Button size="lg" className="text-base px-8 h-12 rounded-full">
+                <Button id='header-create-invoice-button' size="lg" className="text-base px-8 h-12 rounded-full">
                   Crear Mi Primera Factura Gratis
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
@@ -201,7 +201,7 @@ export default function LandingPage() {
 
           <div className="mt-12 text-center">
             <Link href={appConfig.routes.invoice}>
-              <Button size="lg" className="text-base px-8 h-12 rounded-full">
+              <Button id="comparison-create-invoice-button" size="lg" className="text-base px-8 h-12 rounded-full">
                 Comenzar Gratis Ahora
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -329,7 +329,7 @@ export default function LandingPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href={appConfig.routes.invoice}>
-              <Button size="lg" className="text-base px-8 h-12 rounded-full">
+              <Button id="cta-create-invoice-button" size="lg" className="text-base px-8 h-12 rounded-full">
                 Crear Mi Primera Factura Gratis
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>

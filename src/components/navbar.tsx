@@ -27,7 +27,8 @@ export function Navbar() {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <Link 
+            <Link
+              id="navbar-create-invoice-button"
               href={appConfig.routes.invoice} 
               className="text-sm font-medium text-foreground hover:text-primary transition-colors hidden sm:block"
             >
