@@ -166,7 +166,11 @@
   @page {
     /* Safari ignora !important aquí, mejor sin eso */
     size: A4 portrait;
-    margin: 0;
+    padding: 10mm 0 10mm 0;
+  }
+
+  @page :first {
+    padding: 0 0 10mm 0;
   }
 
   html, body {
