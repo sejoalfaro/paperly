@@ -7,6 +7,7 @@ import {
   PDF_OPTIONS,
 } from '@/src/lib/playwright-config'
 import { env } from '@/src/env'
+import { encodeToBase64 } from '@/src/lib/base64-utils'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -27,7 +28,8 @@ export async function POST(req: NextRequest) {
     }
 
     const baseUrl = env.NEXT_PUBLIC_APP_URL
-    const encodedData = btoa(JSON.stringify(quoteData))
+    console.log(quoteData)
+    const encodedData = encodeToBase64(quoteData)
     const quoteUrl = `${baseUrl}/quote?data=${encodeURIComponent(encodedData)}&print=true&theme=${theme}`
 
     let browser = null

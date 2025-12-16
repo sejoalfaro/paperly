@@ -1,10 +1,11 @@
 import { InvoiceData } from '@/src/types/invoice'
+import { encodeToBase64, safeDecodeFromBase64 } from './base64-utils'
 
 /**
  * Codifica los datos de la factura en base64 para incluir en URL
  */
 export function encodeInvoiceData(data: InvoiceData): string {
-  return btoa(JSON.stringify(data))
+  return encodeToBase64(data)
 }
 
 /**
@@ -13,8 +14,11 @@ export function encodeInvoiceData(data: InvoiceData): string {
  */
 export function decodeInvoiceData(encoded: string): InvoiceData | null {
   try {
-    const decoded = atob(encoded)
-    const data = JSON.parse(decoded) as InvoiceData
+    const data = safeDecodeFromBase64<InvoiceData>(encoded)
+    
+    if (!data) {
+      return null
+    }
     
     // Validación básica de estructura
     if (!data.issuer || !data.receiver || !data.details || !data.items) {

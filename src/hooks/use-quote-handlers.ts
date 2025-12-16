@@ -241,6 +241,14 @@ export function useQuoteHandlers(
     }))
   }, [setData])
 
+  // Discount handlers
+  const handleDiscountChange = useCallback((field: keyof QuoteState["discount"], value: string | number) => {
+    setData(prev => ({
+      ...prev,
+      discount: { ...prev.discount, [field]: value }
+    }))
+  }, [setData])
+
   return {
     handleFieldChange,
     handleIssuerChange,
@@ -268,6 +276,7 @@ export function useQuoteHandlers(
     removeAssumption,
     handleNextStepChange,
     addNextStep,
-    removeNextStep
+    removeNextStep,
+    handleDiscountChange
   }
 }

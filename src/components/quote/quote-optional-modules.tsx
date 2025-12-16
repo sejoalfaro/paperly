@@ -2,6 +2,7 @@
 
 import { QuoteState, OptionalModule } from '@/src/types/quote'
 import { Input } from '@/src/components/ui/input'
+import { Textarea } from '@/src/components/ui/textarea'
 import { Button } from '@/src/components/ui/button'
 import { Plus, Trash2 } from 'lucide-react'
 
@@ -34,22 +35,22 @@ export function QuoteOptionalModules({
           <tbody className="divide-y divide-border">
             {data.optionalModules?.map((mod, i) => (
               <tr key={i} className="group hover:bg-accent/50 transition-colors">
-                <td className="py-3 pr-4 w-1/3 align-top">
+                <td className="py-3 pr-4 align-top">
                   <Input
                     type="text"
                     value={mod.name}
                     onChange={(e) => onOptionalModuleChange(i, 'name', e.target.value)}
                     placeholder="Nombre del módulo"
-                    className="font-medium border-none px-0 h-auto shadow-none"
+                    className="font-medium border-none px-0 h-auto shadow-none field-sizing-content w-fit"
                   />
                 </td>
                 <td className="py-3 pr-4 align-top">
-                  <Input
-                    type="text"
+                  <Textarea
                     value={mod.desc}
                     onChange={(e) => onOptionalModuleChange(i, 'desc', e.target.value)}
                     placeholder="Descripción del módulo"
-                    className="text-muted-foreground border-none px-0 h-auto shadow-none"
+                    className="text-muted-foreground border-none px-0 shadow-none min-h-8 resize-none py-0"
+                    rows={1}
                   />
                 </td>
                 <td className="py-3 w-12 align-top">

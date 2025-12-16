@@ -44,7 +44,7 @@ export function QuoteMaintenance({
             >
               <Trash2 className="w-3 h-3 text-destructive" />
             </Button>
-            <div className="mb-3">
+            <div>
               <Input
                 type="text"
                 value={plan.name}

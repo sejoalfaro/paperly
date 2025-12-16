@@ -40,7 +40,7 @@ export function QuoteTimeline({
               value={item.week}
               onChange={(e) => onTimelineChange(i, 'week', e.target.value)}
               placeholder="Semana/Fase"
-              className="w-fit shrink-0 text-xs font-semibold uppercase tracking-wider border-none px-0 h-auto shadow-none"
+              className="!w-1/4 shrink-0 text-xs font-semibold uppercase tracking-wider border-none px-0 h-auto shadow-none"
             />
             <div className="flex items-center gap-2 flex-1">
               <Input

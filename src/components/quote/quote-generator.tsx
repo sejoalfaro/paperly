@@ -28,7 +28,7 @@ export function QuoteGenerator() {
   useQuoteTheme()
   
   const [data, setData] = useQuoteData()
-  const { total } = useQuoteCalculations(data)
+  const { subtotal, discount, total } = useQuoteCalculations(data)
   const {
     handleFieldChange,
     handleIssuerChange,
@@ -56,7 +56,8 @@ export function QuoteGenerator() {
     removeAssumption,
     handleNextStepChange,
     addNextStep,
-    removeNextStep
+    removeNextStep,
+    handleDiscountChange
   } = useQuoteHandlers(setData)
 
   return (
@@ -133,7 +134,13 @@ export function QuoteGenerator() {
           </div>
 
           {/* Total */}
-          <QuoteTotal total={total} />
+          <QuoteTotal 
+            data={data}
+            subtotal={subtotal}
+            discount={discount}
+            total={total}
+            onDiscountChange={handleDiscountChange}
+          />
 
           <div className="p-4 sm:p-6 md:p-10 print:p-10">
             {/* Maintenance */}

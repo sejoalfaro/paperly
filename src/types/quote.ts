@@ -15,6 +15,11 @@ export interface QuoteIssuer {
   website: string
 }
 
+export interface QuoteDiscount {
+  type: "percentage" | "fixed"
+  value: number
+}
+
 export interface QuoteState {
   issuer: QuoteIssuer
   projectName: string
@@ -33,6 +38,7 @@ export interface QuoteState {
   assumptions: string[]
   nextSteps: string[]
   closingMessage: string
+  discount: QuoteDiscount
 }
 
 export interface ScopeSection {

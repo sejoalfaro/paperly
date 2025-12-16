@@ -161,5 +161,9 @@ export const DEFAULT_QUOTE_DATA: QuoteState = {
     "Aprobación de estructura y diseño.",
     "Firma y anticipo (50%)."
   ],
-  closingMessage: "Gracias por considerar nuestra propuesta. Estamos entusiasmados con la posibilidad de colaborar en este proyecto y confiamos en que nuestra experiencia y dedicación contribuirán al éxito de su iniciativa. Quedamos a su disposición para cualquier consulta o aclaración."
+  closingMessage: "Gracias por considerar nuestra propuesta. Estamos entusiasmados con la posibilidad de colaborar en este proyecto y confiamos en que nuestra experiencia y dedicación contribuirán al éxito de su iniciativa. Quedamos a su disposición para cualquier consulta o aclaración.",
+  discount: {
+    type: "percentage",
+    value: 0
+  }
 } as const

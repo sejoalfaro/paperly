@@ -37,7 +37,7 @@ export function QuoteItemsTable({
               <th className="py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider w-8">
                 <span className="sr-only">Incluir</span>
               </th>
-              <th className="py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider w-1/3">
+              <th className="py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider w-1/4">
                 Concepto
               </th>
               <th className="py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden sm:table-cell">
@@ -70,13 +70,13 @@ export function QuoteItemsTable({
                     value={item.label}
                     onChange={(e) => onItemChange(item.id, 'label', e.target.value)}
                     placeholder="Concepto"
-                    className="text-sm font-medium border-none px-0 h-auto shadow-none"
+                    className={`text-sm font-medium border-none px-0 h-auto shadow-none ${item.included ? '' : 'line-through'}`}
                   />
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell align-top">
                   <Textarea
                     placeholder="Descripción"
-                    className="w-full bg-transparent border-none focus-visible:ring-0 p-0 text-sm text-muted-foreground resize-none h-auto min-h-6 overflow-visible shadow-none print:whitespace-normal"
+                    className="w-full !py-1 bg-transparent border-none focus-visible:ring-0 p-0 text-sm text-muted-foreground resize-none h-auto min-h-6 overflow-visible shadow-none print:whitespace-normal"
                     rows={1}
                     value={item.description}
                     onChange={(e) => onItemChange(item.id, 'description', e.target.value)}
@@ -85,22 +85,31 @@ export function QuoteItemsTable({
                       target.style.height = 'auto';
                       target.style.height = target.scrollHeight + 'px';
                     }}
+                    {...(item.included ? {} : { style: { textDecoration: 'line-through' } })}
                   />
                 </td>
                 <td className="py-3 text-right font-mono whitespace-nowrap align-top">
-                  {item.price === 0 ? (
-                    <span className="text-xs text-muted-foreground">INCLUIDO</span>
-                  ) : (
-                    <div className="flex items-center justify-end gap-1">
-                      <Input
-                        type="number"
-                        value={item.price}
-                        onChange={(e) => onItemChange(item.id, 'price', Number(e.target.value))}
-                        className="text-sm text-right border-none px-0 h-auto w-20 font-mono shadow-none"
-                      />
-                      <span className="text-sm font-mono text-muted-foreground">US$</span>
-                    </div>
-                  )}
+                  <div className="flex items-center justify-end gap-1">
+                    <Input
+                      type="number"
+                      value={item.price}
+                      onChange={(e) => onItemChange(item.id, 'price', Number(e.target.value))}
+                      placeholder="0"
+                      className="text-sm text-right border-none px-0 h-auto w-20 font-mono shadow-none print:!hidden"
+                      {...(item.included ? {} : { style: { textDecoration: 'line-through' } })}
+                    />
+                    <span className="text-sm font-mono text-muted-foreground print:hidden">US$</span>
+                    <span
+                      className="hidden print:inline text-sm"
+                      {...(item.included ? {} : { style: { textDecoration: 'line-through' } })}
+                    >
+                      {item.price === 0 ? (
+                        <span className="text-xs text-muted-foreground">INCLUIDO</span>
+                      ) : (
+                        <span className="font-mono">{item.price} US$</span>
+                      )}
+                    </span>
+                  </div>
                 </td>
                 <td className="py-3 pl-2 align-top">
                   <Button

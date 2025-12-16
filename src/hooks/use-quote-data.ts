@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { QuoteState } from '@/src/types/quote'
 import { DEFAULT_QUOTE_DATA } from '@/src/lib/quote-defaults'
+import { safeDecodeFromBase64 } from '@/src/lib/base64-utils'
 
 /**
  * Migra datos antiguos al nuevo formato
@@ -32,8 +33,10 @@ export function useQuoteData() {
     // Primero intentar cargar desde URL
     if (dataParam) {
       try {
-        const decoded = JSON.parse(atob(dataParam))
-        return migrateQuoteData(decoded)
+        const decoded = safeDecodeFromBase64<Partial<QuoteState>>(dataParam)
+        if (decoded) {
+          return migrateQuoteData(decoded)
+        }
       } catch (error) {
         console.error('Error decoding quote data:', error)
       }
