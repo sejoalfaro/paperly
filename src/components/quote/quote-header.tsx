@@ -4,9 +4,9 @@ import { QuoteState, QuoteIssuer } from '@/src/types/quote'
 import { Input } from '@/src/components/ui/input'
 
 interface QuoteHeaderProps {
-  data: QuoteState
-  onFieldChange: (field: keyof QuoteState, value: string) => void
-  onIssuerChange: (field: keyof QuoteIssuer, value: string) => void
+  readonly data: QuoteState
+  readonly onFieldChange: (field: keyof QuoteState, value: string) => void
+  readonly onIssuerChange: (field: keyof QuoteIssuer, value: string) => void
 }
 
 export function QuoteHeader({ data, onFieldChange, onIssuerChange }: QuoteHeaderProps) {
@@ -15,12 +15,16 @@ export function QuoteHeader({ data, onFieldChange, onIssuerChange }: QuoteHeader
       <div className="flex flex-col md:flex-row print:flex-row justify-between gap-6 md:gap-8 print:gap-8">
         <div className="flex-1 space-y-4 md:space-y-6 print:space-y-6">
           <div>
-            <Input
-              type="text"
+            <textarea
               placeholder="NOMBRE DE TU EMPRESA"
-              className="w-full text-2xl md:text-3xl print:text-3xl font-bold tracking-tight border-none focus-visible:ring-0 p-0 bg-transparent uppercase shadow-none h-auto"
+              className="w-full text-2xl md:text-3xl print:text-3xl font-bold tracking-tight border-none focus-visible:ring-0 p-0 bg-transparent uppercase shadow-none h-auto resize-none overflow-hidden outline-none leading-tight"
+              rows={1}
               value={data.issuer.name}
               onChange={(e) => onIssuerChange("name", e.target.value)}
+              onInput={(e) => {
+                e.currentTarget.style.height = 'auto'
+                e.currentTarget.style.height = e.currentTarget.scrollHeight + 'px'
+              }}
             />
           </div>
 
@@ -69,22 +73,24 @@ export function QuoteHeader({ data, onFieldChange, onIssuerChange }: QuoteHeader
           </div>
 
           <div className="space-y-3 md:space-y-4 print:space-y-4 p-4 md:p-6 print:p-6 rounded-lg bg-muted/50">
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-medium text-muted-foreground">Nº Cotización</label>
+            <div className="flex items-center gap-4">
+              <label htmlFor="quote-number" className="text-sm font-medium text-muted-foreground shrink-0">Nº Cotización</label>
               <Input
+                id="quote-number"
                 type="text"
                 value={data.quoteNumber}
                 onChange={(e) => onFieldChange('quoteNumber', e.target.value)}
-                className="text-right font-mono print:font-mono font-medium bg-transparent border-b border-t-0 border-x-0 rounded-none focus-visible:ring-0 w-32 text-sm shadow-none h-auto py-1"
+                className="text-right font-mono print:font-mono font-medium bg-transparent border-b border-t-0 border-x-0 rounded-none focus-visible:ring-0 flex-1 min-w-0 text-sm shadow-none h-auto py-1"
               />
             </div>
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-medium text-muted-foreground">Fecha</label>
+            <div className="flex items-center justify-between gap-4">
+              <label htmlFor="quote-date" className="text-sm font-medium text-muted-foreground shrink-0">Fecha</label>
               <Input
+                id="quote-date"
                 type="date"
                 value={data.startDate}
                 onChange={(e) => onFieldChange('startDate', e.target.value)}
-                className="text-right font-mono print:font-mono font-medium bg-transparent border-b border-t-0 border-x-0 rounded-none focus-visible:ring-0 w-32 text-sm shadow-none h-auto py-1"
+                className="font-mono print:font-mono font-medium bg-transparent border-b border-t-0 border-x-0 rounded-none focus-visible:ring-0 w-auto text-sm shadow-none h-auto py-1"
               />
             </div>
           </div>

@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef } from 'react'
 import { QuoteState, QuoteItem } from '@/src/types/quote'
 import { Input } from '@/src/components/ui/input'
 import { Textarea } from '@/src/components/ui/textarea'
@@ -15,6 +16,11 @@ interface QuoteItemsTableProps {
   onRemoveItem: (itemId: string) => void
 }
 
+function autoResize(el: HTMLTextAreaElement) {
+  el.style.height = 'auto'
+  el.style.height = el.scrollHeight + 'px'
+}
+
 export function QuoteItemsTable({
   data,
   onItemChange,
@@ -22,6 +28,12 @@ export function QuoteItemsTable({
   onAddItem,
   onRemoveItem
 }: QuoteItemsTableProps) {
+  const tbodyRef = useRef<HTMLTableSectionElement>(null)
+
+  useEffect(() => {
+    tbodyRef.current?.querySelectorAll('textarea').forEach(autoResize)
+  }, [data.items])
+
   return (
     <section className="mb-8">
       <div className="flex justify-between items-end mb-4">
@@ -51,26 +63,27 @@ export function QuoteItemsTable({
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-border">
+          <tbody ref={tbodyRef} className="divide-y divide-border">
             {data.items.map((item) => (
               <tr
                 key={item.id}
                 className={`group hover:bg-accent/20 transition-colors ${item.included ? '' : 'opacity-50'}`}
               >
-                <td className="py-3 pr-2 align-top">
+                <td className="py-3 pr-2 align-middle">
                   <Checkbox
-                    className='mt-1.5'
+                    className=''
                     checked={item.included}
                     onCheckedChange={() => onItemToggle(item.id)}
                   />
                 </td>
                 <td className="py-3 pr-4 align-top">
-                  <Input
-                    type="text"
+                  <Textarea
                     value={item.label}
                     onChange={(e) => onItemChange(item.id, 'label', e.target.value)}
                     placeholder="Concepto"
-                    className={`text-sm font-medium border-none px-0 h-auto shadow-none ${item.included ? '' : 'line-through'}`}
+                    rows={1}
+                    className={`text-sm font-medium border-none px-0 h-auto shadow-none resize-none overflow-hidden ${item.included ? '' : 'line-through'}`}
+                    onInput={(e) => autoResize(e.target as HTMLTextAreaElement)}
                   />
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell align-top">

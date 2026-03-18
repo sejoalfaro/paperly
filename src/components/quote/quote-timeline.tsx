@@ -1,7 +1,9 @@
 "use client"
 
+import { useEffect, useRef } from 'react'
 import { QuoteState, TimelineItem } from '@/src/types/quote'
 import { Input } from '@/src/components/ui/input'
+import { Textarea } from '@/src/components/ui/textarea'
 import { Button } from '@/src/components/ui/button'
 import { Plus, Trash2 } from 'lucide-react'
 
@@ -12,12 +14,23 @@ interface QuoteTimelineProps {
   onRemoveTimelineItem: (index: number) => void
 }
 
-export function QuoteTimeline({ 
+function autoResize(el: HTMLTextAreaElement) {
+  el.style.height = 'auto'
+  el.style.height = el.scrollHeight + 'px'
+}
+
+export function QuoteTimeline({
   data,
   onTimelineChange,
   onAddTimelineItem,
   onRemoveTimelineItem
 }: QuoteTimelineProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    containerRef.current?.querySelectorAll('textarea').forEach(autoResize)
+  }, [data.timeline])
+
   return (
     <section className="mb-8">
       <div className="flex justify-between items-center mb-4">
@@ -29,7 +42,7 @@ export function QuoteTimeline({
           Agregar Fase
         </Button>
       </div>
-      <div className="space-y-4">
+      <div ref={containerRef} className="space-y-4">
         {data.timeline?.map((item, i) => (
           <div 
             key={i} 
@@ -43,12 +56,17 @@ export function QuoteTimeline({
               className="!w-1/4 shrink-0 text-xs font-semibold uppercase tracking-wider border-none px-0 h-auto shadow-none"
             />
             <div className="flex items-center gap-2 flex-1">
-              <Input
-                type="text"
+              <Textarea
                 value={item.task}
                 onChange={(e) => onTimelineChange(i, 'task', e.target.value)}
                 placeholder="Descripción de la tarea"
-                className="text-sm leading-relaxed border-none px-0 h-auto flex-1 shadow-none"
+                rows={1}
+                className="text-sm leading-relaxed border-none px-0 h-auto flex-1 shadow-none resize-none overflow-hidden"
+                onInput={(e) => {
+                  const t = e.target as HTMLTextAreaElement
+                  t.style.height = 'auto'
+                  t.style.height = t.scrollHeight + 'px'
+                }}
               />
               <Button
                 variant="ghost"

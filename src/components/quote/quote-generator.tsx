@@ -1,8 +1,9 @@
 "use client"
 
+import { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
+import { Save, History } from 'lucide-react'
 import { Navbar } from '@/src/components/navbar'
-import { Footer } from '@/src/components/footer'
 import { QuoteHeader } from '@/src/components/quote/quote-header'
 import { QuoteClient } from '@/src/components/quote/quote-client'
 import { QuoteSummary } from '@/src/components/quote/quote-summary'
@@ -15,20 +16,34 @@ import { QuoteMaintenance } from '@/src/components/quote/quote-maintenance'
 import { QuoteFooter } from '@/src/components/quote/quote-footer'
 import { QuoteDownloadButton } from '@/src/components/quote/quote-download-button'
 import { QuoteShareButton } from '@/src/components/quote/quote-share-button'
+import { QuoteHistorySidebar } from '@/src/components/quote/quote-history-sidebar'
+import { Button } from '@/src/components/ui/button'
+import { DEFAULT_QUOTE_DATA } from '@/src/lib/quote-defaults'
 import { useQuoteData } from '@/src/hooks/use-quote-data'
 import { useQuoteCalculations } from '@/src/hooks/use-quote-calculations'
 import { useQuoteHandlers } from '@/src/hooks/use-quote-handlers'
 import { useQuoteTheme } from '@/src/hooks/use-quote-theme'
+import { useQuoteHistory } from '@/src/hooks/use-quote-history'
 
 export function QuoteGenerator() {
   const searchParams = useSearchParams()
   const printMode = searchParams.get('print') === 'true'
-  
+
   // Aplicar tema desde URL
   useQuoteTheme()
-  
+
   const [data, setData] = useQuoteData()
   const { subtotal, discount, total } = useQuoteCalculations(data)
+  const { history, saveQuote, deleteQuote, clearHistory } = useQuoteHistory()
+  const [historyOpen, setHistoryOpen] = useState(false)
+
+  const handleNewQuote = () => {
+    setData({
+      ...DEFAULT_QUOTE_DATA,
+      quoteNumber: `QUOTE-${new Date().getFullYear()}-${String(Date.now()).slice(-6)}`,
+      startDate: new Date().toISOString().split('T')[0],
+    })
+  }
   const {
     handleFieldChange,
     handleIssuerChange,
@@ -63,14 +78,46 @@ export function QuoteGenerator() {
   return (
     <>
       {!printMode && <Navbar />}
-      <div 
-        id="quote-page" 
-        className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 print:p-0 print:m-0 print:min-h-0 print:overflow-visible bg-background"
+      <div className="flex print:block">
+        {!printMode && (
+          <QuoteHistorySidebar
+            history={history}
+            onNew={handleNewQuote}
+            onLoad={setData}
+            onDelete={deleteQuote}
+            onClear={clearHistory}
+            mobileOpen={historyOpen}
+            onMobileOpenChange={setHistoryOpen}
+          />
+        )}
+      <div
+        id="quote-page"
+        className="flex-1 min-h-screen py-8 px-4 sm:px-6 lg:px-8 print:p-0 print:m-0 print:min-h-0 print:overflow-visible bg-background"
       >
         {!printMode && (
-          <div className="max-w-4xl mx-auto mb-6 flex justify-end gap-3 no-print">
-            <QuoteShareButton quoteData={data} />
-            <QuoteDownloadButton quoteData={data} />
+          <div className="max-w-4xl mx-auto mb-6 flex justify-between gap-3 no-print">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setHistoryOpen(true)}
+              className="gap-2 lg:hidden"
+            >
+              <History className="size-4" />
+              Historial
+            </Button>
+            <div className="flex gap-3 ml-auto">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => saveQuote(data, total)}
+                className="gap-2"
+              >
+                <Save className="size-4" />
+                Guardar
+              </Button>
+              <QuoteShareButton quoteData={data} />
+              <QuoteDownloadButton quoteData={data} />
+            </div>
           </div>
         )}
 
@@ -176,7 +223,7 @@ export function QuoteGenerator() {
 
         </div>
       </div>
-      {!printMode && <Footer />}
+      </div>
     </>
   )
 }

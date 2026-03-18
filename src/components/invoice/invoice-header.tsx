@@ -14,12 +14,16 @@ export function InvoiceHeader({ data, onIssuerChange, onDetailsChange }: Invoice
       <div className="flex flex-col md:flex-row print:flex-row justify-between gap-6 md:gap-8 print:gap-8">
         <div className="flex-1 space-y-4 md:space-y-6 print:space-y-6">
           <div>
-            <Input
-              type="text"
+            <textarea
               placeholder="NOMBRE DE TU EMPRESA"
-              className="w-full text-2xl md:text-3xl print:text-3xl font-bold tracking-tight border-none focus-visible:ring-0 p-0 bg-transparent uppercase shadow-none h-auto"
+              className="w-full text-2xl md:text-3xl print:text-3xl font-bold tracking-tight border-none focus-visible:ring-0 p-0 bg-transparent uppercase shadow-none h-auto resize-none overflow-hidden outline-none leading-tight"
+              rows={1}
               value={data.issuer.name}
               onChange={(e) => onIssuerChange("name", e.target.value)}
+              onInput={(e) => {
+                e.currentTarget.style.height = 'auto'
+                e.currentTarget.style.height = e.currentTarget.scrollHeight + 'px'
+              }}
             />
           </div>
 
