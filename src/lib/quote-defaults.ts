@@ -5,163 +5,146 @@ import { QuoteState } from '@/src/types/quote'
  */
 export const DEFAULT_QUOTE_DATA: QuoteState = {
   issuer: {
-    name: "",
-    id: "",
-    address: "",
-    phone: "",
-    email: "",
-    website: "",
+    name: "Pixel Studio",
+    id: "RFC-PST123456",
+    address: "Av. Reforma 222, Col. Juárez, CDMX",
+    phone: "+52 55 1234 5678",
+    email: "hola@pixelstudio.mx",
+    website: "www.pixelstudio.mx",
   },
-  projectName: "",
+  projectName: "Rediseño Web Corporativo",
   quoteNumber: `QUOTE-${new Date().getFullYear()}-${String(Date.now()).slice(-6)}`,
   startDate: new Date().toISOString().split("T")[0],
-  clientCompany: "",
-  clientContact: "",
-  clientEmail: "",
-  clientPhone: "",
-  executiveSummary: "Propuesta integral para el desarrollo de una solución web moderna, escalable y centrada en la experiencia del usuario. Nuestro enfoque combina diseño estratégico, desarrollo técnico robusto y un proceso colaborativo que asegura resultados alineados con los objetivos de negocio.",
+  clientCompany: "Acme Corp",
+  clientContact: "María García",
+  clientEmail: "maria@acmecorp.com",
+  clientPhone: "+1 555 987 6543",
+  executiveSummary: "Propuesta para el rediseño completo del sitio web corporativo de Acme Corp, con enfoque en experiencia de usuario, rendimiento y conversión. El proyecto contempla diseño, desarrollo e integración con los sistemas actuales del cliente.",
   items: [
     {
       id: "1",
       label: "Diseño UI/UX",
-      description: "Diseño de interfaz y experiencia de usuario completa",
+      description: "Wireframes, prototipo interactivo y sistema de diseño",
       price: 2500,
       included: true
     },
     {
       id: "2",
       label: "Desarrollo Frontend",
-      description: "Implementación con React/Next.js",
-      price: 5000,
-      included: true
-    },
-    {
-      id: "3",
-      label: "Desarrollo Backend",
-      description: "API REST y base de datos",
+      description: "Maquetación responsive con React/Next.js",
       price: 4000,
       included: true
     },
     {
+      id: "3",
+      label: "Backend & API",
+      description: "Servidor, base de datos y endpoints REST",
+      price: 3500,
+      included: true
+    },
+    {
       id: "4",
-      label: "Panel Admin",
-      description: "Dashboard de administración completo",
-      price: 3000,
+      label: "Testing & QA",
+      description: "Pruebas funcionales, de rendimiento y compatibilidad",
+      price: 1000,
       included: true
     },
     {
       id: "5",
-      label: "Testing & QA",
-      description: "Pruebas exhaustivas y aseguramiento de calidad",
-      price: 0,
+      label: "Despliegue",
+      description: "Configuración de servidor, dominio y SSL",
+      price: 500,
       included: true
     },
     {
       id: "6",
-      label: "Despliegue",
-      description: "Configuración de hosting y deployment",
-      price: 0,
-      included: true
-    },
-    {
-      id: "7",
-      label: "E-commerce",
-      description: "Módulo completo de tienda online",
-      price: 3500,
-      included: false
-    },
-    {
-      id: "8",
-      label: "Blog/CMS",
-      description: "Sistema de gestión de contenidos",
-      price: 2000,
+      label: "Tienda en línea",
+      description: "Módulo e-commerce con pasarela de pagos",
+      price: 3000,
       included: false
     }
   ],
   scopeSections: [
     {
-      title: "🎨 Diseño y Experiencia de Usuario",
+      title: "Diseño y Experiencia de Usuario",
       content: [
-        "Diseño UI/UX responsive y moderno",
-        "Prototipado interactivo de interfaces principales",
-        "Sistema de diseño con guía de estilos",
-        "Optimización para dispositivos móviles y tabletas"
+        "Auditoría del sitio actual e investigación de usuarios",
+        "Diseño de wireframes y flujos de navegación",
+        "Prototipo interactivo de alta fidelidad",
+        "Sistema de diseño y guía de estilos"
       ]
     },
     {
-      title: "⚙️ Desarrollo e Implementación",
+      title: "Desarrollo e Integración",
       content: [
-        "Desarrollo frontend con tecnologías modernas",
-        "Integración de APIs y servicios backend",
-        "Sistema de autenticación y gestión de usuarios",
-        "Panel de administración completo"
+        "Desarrollo frontend responsive (mobile-first)",
+        "Integración con CRM y herramientas existentes",
+        "Optimización de rendimiento y Core Web Vitals",
+        "Panel de administración de contenidos"
       ]
     },
     {
-      title: "🚀 Despliegue y Capacitación",
+      title: "Lanzamiento y Soporte",
       content: [
-        "Configuración de hosting y dominio",
-        "Optimización SEO básica",
-        "Documentación técnica completa",
-        "Sesión de capacitación para el equipo"
+        "Migración de contenido existente",
+        "Configuración de analytics y seguimiento de conversiones",
+        "Capacitación al equipo interno",
+        "30 días de soporte post-lanzamiento incluidos"
       ]
     }
   ],
   optionalModules: [
     {
-      name: "E-commerce Avanzado",
-      desc: "Pasarela de pagos, gestión de inventario, cupones y promociones"
+      name: "Tienda en línea",
+      desc: "Catálogo de productos, carrito de compras y pasarela de pagos (Stripe / PayPal)"
     },
     {
-      name: "Sistema de Blog/CMS",
-      desc: "Gestor de contenidos con editor visual y categorización"
+      name: "Blog / Noticias",
+      desc: "Editor de contenidos con categorías, etiquetas y SEO integrado"
     },
     {
-      name: "Integraciones API",
-      desc: "Conexión con servicios externos (CRM, ERP, Marketing)"
-    },
-    {
-      name: "Multilenguaje",
-      desc: "Sistema completo de internacionalización (i18n)"
+      name: "Chat en vivo",
+      desc: "Integración con Intercom, Drift u otra plataforma de mensajería"
     }
   ],
   timeline: [
-    { week: "Semana 1-2", task: "Kickoff, research y wireframes iniciales" },
-    { week: "Semana 3-4", task: "Diseño UI/UX y aprobación de mockups" },
-    { week: "Semana 5-8", task: "Desarrollo frontend y backend" },
+    { week: "Semana 1", task: "Kickoff, auditoría y definición de alcance" },
+    { week: "Semana 2–3", task: "Wireframes y prototipo interactivo" },
+    { week: "Semana 4–5", task: "Diseño visual y aprobación de mockups" },
+    { week: "Semana 6–8", task: "Desarrollo frontend y backend" },
     { week: "Semana 9", task: "Testing, QA y correcciones" },
-    { week: "Semana 10", task: "Despliegue, capacitación y entrega final" }
+    { week: "Semana 10", task: "Despliegue, capacitación y entrega" }
   ],
   maintenancePlans: [
     {
       name: "Básico",
       price: 99,
-      desc: "Updates mensuales, monitoreo 24/7, backups semanales"
+      desc: "Actualizaciones mensuales, backups semanales y monitoreo de disponibilidad"
     },
     {
       name: "Profesional",
       price: 199,
-      desc: "Todo lo anterior + soporte prioritario, cambios menores"
+      desc: "Todo lo anterior + soporte prioritario y hasta 4 horas de cambios menores al mes"
     },
     {
       name: "Enterprise",
       price: 399,
-      desc: "Todo lo anterior + desarrollos custom, SLA garantizado"
+      desc: "Todo lo anterior + SLA garantizado, desarrollos a medida y reporte mensual de métricas"
     }
   ],
   assumptions: [
-    "El cliente proveerá contenido (textos, imágenes) en tiempo y forma.",
-    "Hosting y dominio son responsabilidad del cliente (podemos recomendarlos).",
-    "Funcionalidades fuera del alcance requerirán cotización adicional.",
-    "El proyecto asume máximo 3 rondas de revisión por entregable.",
-    "Precios en USD, sujetos a cambio si hay modificaciones mayores al scope."
+    "El cliente entregará textos e imágenes definitivos antes del inicio del desarrollo.",
+    "El hosting y dominio son contratados por el cliente (podemos asesorar en la elección).",
+    "Se contemplan hasta 2 rondas de revisión por entregable.",
+    "Cambios de alcance fuera de este documento requieren cotización adicional.",
+    "Los precios están en USD y son válidos por 30 días a partir de la fecha de emisión."
   ],
   nextSteps: [
-    "Sesión de briefing inicial.",
-    "Aprobación de estructura y diseño.",
-    "Firma y anticipo (50%)."
+    "Revisar y aprobar esta propuesta.",
+    "Agendar llamada de kickoff para alinear detalles.",
+    "Firma de contrato y pago del anticipo (50%) para iniciar."
   ],
-  closingMessage: "Gracias por considerar nuestra propuesta. Estamos entusiasmados con la posibilidad de colaborar en este proyecto y confiamos en que nuestra experiencia y dedicación contribuirán al éxito de su iniciativa. Quedamos a su disposición para cualquier consulta o aclaración.",
+  closingMessage: "Gracias por considerar esta propuesta. Estamos listos para comenzar y confiamos en que juntos lograremos un resultado que supere las expectativas. Quedo a tu disposición para cualquier pregunta.",
   discount: {
     type: "percentage",
     value: 0
