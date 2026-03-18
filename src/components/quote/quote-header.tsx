@@ -1,14 +1,15 @@
-import { Input } from '@/src/components/ui/input'
-import { InvoiceData } from '@/src/types/invoice'
-import { localeDateString } from '@/src/lib/invoice'
+"use client"
 
-interface InvoiceHeaderProps {
-  data: InvoiceData
-  onIssuerChange: (field: keyof InvoiceData["issuer"], value: string) => void
-  onDetailsChange: (field: keyof InvoiceData["details"], value: string) => void
+import { QuoteState, QuoteIssuer } from '@/src/types/quote'
+import { Input } from '@/src/components/ui/input'
+
+interface QuoteHeaderProps {
+  readonly data: QuoteState
+  readonly onFieldChange: (field: keyof QuoteState, value: string) => void
+  readonly onIssuerChange: (field: keyof QuoteIssuer, value: string) => void
 }
 
-export function InvoiceHeader({ data, onIssuerChange, onDetailsChange }: InvoiceHeaderProps) {
+export function QuoteHeader({ data, onFieldChange, onIssuerChange }: QuoteHeaderProps) {
   return (
     <div className="p-4 sm:p-6 md:p-10 print:p-10 border-b border-border">
       <div className="flex flex-col md:flex-row print:flex-row justify-between gap-6 md:gap-8 print:gap-8">
@@ -68,59 +69,29 @@ export function InvoiceHeader({ data, onIssuerChange, onDetailsChange }: Invoice
 
         <div className="flex-1 md:max-w-xs print:max-w-xs space-y-4 md:space-y-6 print:space-y-6">
           <div className="text-left md:text-right print:text-right">
-            <h2 className="text-3xl md:text-4xl print:text-4xl font-light tracking-widest uppercase text-muted">Factura</h2>
+            <h2 className="text-3xl md:text-4xl print:text-4xl font-light tracking-widest uppercase text-muted">Cotización</h2>
           </div>
 
           <div className="space-y-3 md:space-y-4 print:space-y-4 p-4 md:p-6 print:p-6 rounded-lg bg-muted/50">
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-medium text-muted-foreground">Nº Factura</label>
+            <div className="flex items-center gap-4">
+              <label htmlFor="quote-number" className="text-sm font-medium text-muted-foreground shrink-0">Nº Cotización</label>
               <Input
+                id="quote-number"
                 type="text"
-                className="text-right font-mono print:font-mono font-medium bg-transparent border-b border-t-0 border-x-0 rounded-none focus-visible:ring-0 w-32 text-sm shadow-none h-auto py-1"
-                value={data.details.number}
-                onChange={(e) => onDetailsChange("number", e.target.value)}
+                value={data.quoteNumber}
+                onChange={(e) => onFieldChange('quoteNumber', e.target.value)}
+                className="text-right font-mono print:font-mono font-medium bg-transparent border-b border-t-0 border-x-0 rounded-none focus-visible:ring-0 flex-1 min-w-0 text-sm shadow-none h-auto py-1"
               />
             </div>
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-medium text-muted-foreground">Fecha Emisión</label>
-              <div>
-                <span className="hidden print:block font-mono">{localeDateString(data.details.date)}</span>
-                <div className="print:hidden block">
-                  <Input
-                    type="date"
-                    className="text-right font-mono bg-transparent border-b border-t-0 border-x-0 rounded-none focus-visible:ring-0 w-32 text-sm shadow-none h-auto py-1"
-                    value={data.details.date}
-                    onChange={(e) => onDetailsChange("date", e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-medium text-muted-foreground">Vencimiento</label>
-              <div>
-                <span className="hidden print:block font-mono">{localeDateString(data.details.dueDate)}</span>
-                <div className="print:hidden block">
-                  <Input
-                    type="date"
-                    className="print:hidden text-right font-mono bg-transparent border-b border-t-0 border-x-0 rounded-none focus-visible:ring-0 w-32 text-sm shadow-none h-auto py-1"
-                    value={data.details.dueDate}
-                    onChange={(e) => onDetailsChange("dueDate", e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-medium text-muted-foreground">Moneda</label>
-              <select
-                className="text-right font-mono bg-transparent border-b focus:ring-0 w-32 text-sm border-input focus:border-foreground text-foreground"
-                value={data.details.currency}
-                onChange={(e) => onDetailsChange("currency", e.target.value)}
-              >
-                <option value="USD">USD ($)</option>
-                <option value="EUR">EUR (€)</option>
-                <option value="CRC">CRC (₡)</option>
-                <option value="MXN">MXN ($)</option>
-              </select>
+            <div className="flex items-center justify-between gap-4">
+              <label htmlFor="quote-date" className="text-sm font-medium text-muted-foreground shrink-0">Fecha</label>
+              <Input
+                id="quote-date"
+                type="date"
+                value={data.startDate}
+                onChange={(e) => onFieldChange('startDate', e.target.value)}
+                className="font-mono print:font-mono font-medium bg-transparent border-b border-t-0 border-x-0 rounded-none focus-visible:ring-0 w-auto text-sm shadow-none h-auto py-1"
+              />
             </div>
           </div>
         </div>

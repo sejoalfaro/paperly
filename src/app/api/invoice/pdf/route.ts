@@ -7,6 +7,7 @@ import {
   PDF_OPTIONS,
 } from '@/src/lib/playwright-config'
 import { env } from '@/src/env'
+import { safeDecodeFromBase64 } from '@/src/lib/base64-utils'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -28,7 +29,7 @@ export async function GET(req: NextRequest) {
 
   const baseUrl = env.NEXT_PUBLIC_APP_URL
 
-  const invoiceUrl = `${baseUrl}/invoice?data=${encodeURIComponent(encodedData)}&print=true&theme=${theme}`
+  const invoiceUrl = `${baseUrl}/invoice?data=${encodedData}&print=true&theme=${theme}`
 
   let browser = null
 
@@ -49,9 +50,12 @@ export async function GET(req: NextRequest) {
 
     let invoiceNumber = 'invoice'
     try {
-      const decoded = JSON.parse(atob(decodeURIComponent(encodedData)))
-      invoiceNumber = decoded.details?.number || 'invoice'
+      const decoded = safeDecodeFromBase64<any>(encodedData)
+      if (decoded) {
+        invoiceNumber = decoded.details?.number || 'invoice'
+      }
     } catch (e) {
+      // Error silently - use default invoice number
     }
 
     return new Response(pdfBuffer as unknown as BodyInit, {

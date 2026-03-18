@@ -5,6 +5,7 @@ import { Download } from 'lucide-react'
 import { Button } from '@/src/components/ui/button'
 import { InvoiceData } from '@/src/types/invoice'
 import { toast } from 'sonner'
+import { encodeToBase64 } from '@/src/lib/base64-utils'
 
 type Props = {
   invoiceData: InvoiceData
@@ -30,7 +31,7 @@ export function InvoiceDownloadButton({
       const theme = isDark ? 'dark' : 'light'
 
       // Codificar datos en base64
-      const encodedData = btoa(JSON.stringify(invoiceData))
+      const encodedData = encodeToBase64(invoiceData)
 
       const res = await fetch(`/api/invoice/pdf?data=${encodeURIComponent(encodedData)}&theme=${theme}`)
 
